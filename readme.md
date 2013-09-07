@@ -42,16 +42,24 @@ generator in html, png embedded base64 code and SVG canvas
 
 
 echo DNS1D::getBarcodeSVG("4445645656", "PHARMA2T");
+
 echo DNS1D::getBarcodeHTML("4445645656", "PHARMA2T");
+
 echo '<img src="' . DNS1D::getBarcodePNG("4", "C39+") . '" alt="barcode"   />';
+
 echo DNS1D::getBarcodePNGPath("4445645656", "PHARMA2T");
+
 echo '<img src="' . DNS1D::getBarcodePNG("4", "C39+") . '" alt="barcode"   />';
 
 
 
 echo DNS1D::getBarcodeSVG("4445645656", "C39");
+
 echo DNS2D::getBarcodeSVG("4445645656", "QRCODE");
+
 echo DNS2D::getBarcodeSVG("4445645656", "PDF417");
+
 echo DNS2D::getBarcodeSVG("4445645656", "DATAMATRIX");
+
 
 echo '<img src="' . DNS2D::getBarcodePNG("4", "PDF417") . '" alt="barcode"   />';
