@@ -35,11 +35,19 @@ class BarcodeServiceProvider extends ServiceProvider {
         $this->app['DNS1D'] = $this->app->share(function($app) {
                     return new DNS1D;
                 });
+        $this->app['DNS2D'] = $this->app->share(function($app) {
+                    return new DNS2D;
+                });
 //
         // Shortcut so developers don't need to add an Alias in app/config/app.php
         $this->app->booting(function() {
                     $loader = \Illuminate\Foundation\AliasLoader::getInstance();
                     $loader->alias('DNS1D', 'Dinesh\Barcode\Facades\DNS1D');
+                });
+
+        $this->app->booting(function() {
+                    $loader = \Illuminate\Foundation\AliasLoader::getInstance();
+                    $loader->alias('DNS2D', 'Dinesh\Barcode\Facades\DNS2D');
                 });
     }
 
@@ -49,7 +57,7 @@ class BarcodeServiceProvider extends ServiceProvider {
      * @return array
      */
     public function provides() {
-        return array("DNS1D");
+        return array("DNS1D", "DNS2D");
     }
 
 }
