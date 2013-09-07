@@ -3,7 +3,7 @@
 namespace Dinesh\Barcode;
 
 //============================================================+
-// File name   : qrcode.php
+// File name   : QRcode.php
 // Author      : Dinesh Rabara
 
 /**

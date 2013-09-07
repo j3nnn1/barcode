@@ -2,7 +2,7 @@
 
 namespace Dinesh\Barcode;
 
-// File name   : pdf417.php
+// File name   : PDF417.php
 // Author      : Dinesh Rabara
 
 /**
