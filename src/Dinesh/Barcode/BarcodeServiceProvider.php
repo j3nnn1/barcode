@@ -22,7 +22,7 @@ class BarcodeServiceProvider extends ServiceProvider {
 
         $this->package('dinesh/barcode');
 
-        include __DIR__ . '/../../routes.php';
+        //include __DIR__ . '/../../routes.php';
     }
 
     /**
