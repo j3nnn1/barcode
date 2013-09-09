@@ -28,7 +28,7 @@ class DNS2D {
      * path to save png in getBarcodePNGPath
      * @var <type>
      */
-    public static $store_path;
+    protected static $store_path;
 
     public function __construct() {
         if (!DNS2D::$store_path) {

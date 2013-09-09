@@ -24,7 +24,7 @@ class DNS1D {
      * path to save png in getBarcodePNGPath
      * @var <type>
      */
-    public static $store_path;
+    protected static $store_path;
 
     /**
      * This is the class constructor.
