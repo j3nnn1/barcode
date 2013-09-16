@@ -30,12 +30,6 @@ class DNS2D {
      */
     protected static $store_path;
 
-    public function __construct() {
-        if (!DNS2D::$store_path) {
-            DNS2D::$store_path = \Config::get("barcode::store_path");
-        }
-    }
-
     /**
      * Return a SVG string representation of barcode.
      * <li>$arrcode['code'] code to be printed on text label</li>
@@ -51,6 +45,9 @@ class DNS2D {
      * @public
      */
     public static function getBarcodeSVG($code, $type, $w = 3, $h = 3, $color = 'black') {
+        if (!DNS2D::$store_path) {
+            DNS2D::setStorPath(\Config::get("barcode::store_path"));
+        }
         //set barcode code and type
         DNS2D::setBarcode($code, $type);
         // replace table for special characters
@@ -95,6 +92,9 @@ class DNS2D {
      * @public
      */
     public static function getBarcodeHTML($code, $type, $w = 10, $h = 10, $color = 'black') {
+        if (!DNS2D::$store_path) {
+            DNS2D::setStorPath(\Config::get("barcode::store_path"));
+        }
         //set barcode code and type
         DNS2D::setBarcode($code, $type);
         $html = '<div style="font-size:0;position:relative;width:' . ($w * DNS2D::$barcode_array['num_cols']) . 'px;height:' . ($h * DNS2D::$barcode_array['num_rows']) . 'px;">' . "\n";
@@ -132,6 +132,9 @@ class DNS2D {
      * @public
      */
     public static function getBarcodePNG($code, $type, $w = 3, $h = 3, $color = array(0, 0, 0)) {
+        if (!DNS2D::$store_path) {
+            DNS2D::setStorPath(\Config::get("barcode::store_path"));
+        }
         //set barcode code and type
         DNS2D::setBarcode($code, $type);
         // calculate image size
@@ -208,7 +211,9 @@ class DNS2D {
      * @public
      */
     public static function getBarcodePNGPath($code, $type, $w = 3, $h = 3, $color = array(0, 0, 0)) {
-
+        if (!DNS2D::$store_path) {
+            DNS2D::setStorPath(\Config::get("barcode::store_path"));
+        }
         //set barcode code and type
         DNS2D::setBarcode($code, $type);
         // calculate image size
@@ -327,6 +332,7 @@ class DNS2D {
                 }
         }
     }
+
     /**
      * 
      * @param type $path
@@ -338,11 +344,8 @@ class DNS2D {
         }
         return $path;
     }
-    
+
     public static function setStorPath($path) {
         DNS2D::$store_path = $path;
     }
-
 }
-
-?>
