@@ -252,7 +252,7 @@ class DNS2D {
             $y += $h;
         }
 
-        $save_file = DNS1D::checkfile(DNS1D::$store_path . $code . ".png");
+        $save_file = DNS2D::checkfile(DNS2D::$store_path . $code . ".png");
 
         if ($imagick) {
             $png->drawimage($bar);
@@ -327,7 +327,18 @@ class DNS2D {
                 }
         }
     }
-
+    /**
+     * 
+     * @param type $path
+     * @return type
+     */
+    protected static function checkfile($path) {
+        if (file_exists($path)) {
+            unlink($path);
+        }
+        return $path;
+    }
+    
     public static function setStorPath($path) {
         DNS2D::$store_path = $path;
     }
