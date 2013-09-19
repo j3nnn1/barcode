@@ -229,7 +229,7 @@ class DNS1D {
         }
         if (ImagePng($png, $save_file)) {
             imagedestroy($png);
-            return $save_file;
+            return str_replace(public_path(), '', $save_file);
         } else {
             imagedestroy($png);
             return $code;
