@@ -128,7 +128,7 @@ class DNS2D {
      * @param $w (int) Width of a single rectangle element in pixels.
      * @param $h (int) Height of a single rectangle element in pixels.
      * @param $color (array) RGB (0-255) foreground color for bar elements (background is transparent).
-     * @return image or false in case of error.
+     * @return path or false in case of error.
      * @public
      */
     public static function getBarcodePNG($code, $type, $w = 3, $h = 3, $color = array(0, 0, 0)) {
@@ -194,6 +194,20 @@ class DNS2D {
         $image = ob_get_clean();
         $image = 'data:image/png;base64,' . base64_encode($image);
         return $image;
+    }
+
+    /**
+     * Return a .png file path which create in server
+     * @param $code (string) code to print
+     * @param $type (string) type of barcode: <ul><li>C39 : CODE 39 - ANSI MH10.8M-1983 - USD-3 - 3 of 9.</li><li>C39+ : CODE 39 with checksum</li><li>C39E : CODE 39 EXTENDED</li><li>C39E+ : CODE 39 EXTENDED + CHECKSUM</li><li>C93 : CODE 93 - USS-93</li><li>S25 : Standard 2 of 5</li><li>S25+ : Standard 2 of 5 + CHECKSUM</li><li>I25 : Interleaved 2 of 5</li><li>I25+ : Interleaved 2 of 5 + CHECKSUM</li><li>C128 : CODE 128</li><li>C128A : CODE 128 A</li><li>C128B : CODE 128 B</li><li>C128C : CODE 128 C</li><li>EAN2 : 2-Digits UPC-Based Extention</li><li>EAN5 : 5-Digits UPC-Based Extention</li><li>EAN8 : EAN 8</li><li>EAN13 : EAN 13</li><li>UPCA : UPC-A</li><li>UPCE : UPC-E</li><li>MSI : MSI (Variation of Plessey code)</li><li>MSI+ : MSI + CHECKSUM (modulo 11)</li><li>POSTNET : POSTNET</li><li>PLANET : PLANET</li><li>RMS4CC : RMS4CC (Royal Mail 4-state Customer Code) - CBC (Customer Bar Code)</li><li>KIX : KIX (Klant index - Customer index)</li><li>IMB: Intelligent Mail Barcode - Onecode - USPS-B-3200</li><li>CODABAR : CODABAR</li><li>CODE11 : CODE 11</li><li>PHARMA : PHARMACODE</li><li>PHARMA2T : PHARMACODE TWO-TRACKS</li></ul>
+     * @param $w (int) Width of a single bar element in pixels.
+     * @param $h (int) Height of a single bar element in pixels.
+     * @param $color (array) RGB (0-255) foreground color for bar elements (background is transparent).
+     * @return url or false in case of error.
+     * @public
+     */
+    public static function getBarcodePNGUri($code, $type, $w = 3, $h = 3, $color = array(0, 0, 0)) {
+        return url(DNS2D::getBarcodePNGPath($code, $type, $w, $h, $color));
     }
 
     /**
@@ -348,4 +362,5 @@ class DNS2D {
     public static function setStorPath($path) {
         DNS2D::$store_path = $path;
     }
+
 }
