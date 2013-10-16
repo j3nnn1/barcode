@@ -25,7 +25,7 @@ from the command line and you should find the files in app/config/packages/dines
 
 Bar-code generator like 
 Qr Code,
-PDF147,
+PDF417,
 C39,C39+,
 C39E,C39E+,
 C93,
