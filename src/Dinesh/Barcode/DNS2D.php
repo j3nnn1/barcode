@@ -270,7 +270,7 @@ class DNS2D {
             }
             $y += $h;
         }
-
+        
         $save_file = DNS2D::checkfile(DNS2D::$store_path . $code . ".png");
 
         if ($imagick) {

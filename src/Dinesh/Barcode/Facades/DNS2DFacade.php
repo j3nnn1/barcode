@@ -4,7 +4,7 @@ namespace Dinesh\Barcode\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class DNS2D extends Facade {
+class DNS2DFacade extends Facade {
 
     /**
      * Get the registered name of the component.
