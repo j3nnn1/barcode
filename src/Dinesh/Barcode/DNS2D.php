@@ -178,12 +178,8 @@ class DNS2D {
             $y += $h;
         }
         ob_start();
-        // send headers
-        header('Content-Type: image/png');
-        header('Cache-Control: public, must-revalidate, max-age=0'); // HTTP/1.1
-        header('Pragma: public');
-        header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // Date in the past
-        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+        // get image out put
+
         if ($imagick) {
             $png->drawimage($bar);
             echo $png;
@@ -192,7 +188,8 @@ class DNS2D {
             imagedestroy($png);
         }
         $image = ob_get_clean();
-        $image = 'data:image/png;base64,' . base64_encode($image);
+        $image = base64_encode($image);
+        //$image = 'data:image/png;base64,' . base64_encode($image);
         return $image;
     }
 
@@ -270,7 +267,7 @@ class DNS2D {
             }
             $y += $h;
         }
-        
+
         $save_file = DNS2D::checkfile(DNS2D::$store_path . $code . ".png");
 
         if ($imagick) {
@@ -297,8 +294,8 @@ class DNS2D {
         $qrtype = strtoupper($mode[0]);
         switch ($qrtype) {
             case 'DATAMATRIX': { // DATAMATRIX (ISO/IEC 16022)
-                    $qrcode = new Datamatrix($code);
-                    DNS2D::$barcode_array = $qrcode->getBarcodeArray();
+                    $barcode = new Datamatrix($code);
+                    DNS2D::$barcode_array = $barcode->getBarcodeArray();
                     DNS2D::$barcode_array['code'] = $code;
                     break;
                 }
@@ -327,8 +324,8 @@ class DNS2D {
                             }
                         }
                     }
-                    $qrcode = new PDF417($code, $ecl, $aspectratio, $macro);
-                    DNS2D::$barcode_array = $qrcode->getBarcodeArray();
+                    $barcode = new PDF417($code, $ecl, $aspectratio, $macro);
+                    DNS2D::$barcode_array = $barcode->getBarcodeArray();
                     DNS2D::$barcode_array['code'] = $code;
                     break;
                 }
@@ -336,8 +333,8 @@ class DNS2D {
                     if (!isset($mode[1]) OR (!in_array($mode[1], array('L', 'M', 'Q', 'H')))) {
                         $mode[1] = 'L'; // Ddefault: Low error correction
                     }
-                    $qrcode = new QRcode($code, strtoupper($mode[1]));
-                    DNS2D::$barcode_array = $qrcode->getBarcodeArray();
+                    $barcode = new QRcode($code, strtoupper($mode[1]));
+                    DNS2D::$barcode_array = $barcode->getBarcodeArray();
                     DNS2D::$barcode_array['code'] = $code;
                     break;
                 }
@@ -348,7 +345,7 @@ class DNS2D {
     }
 
     /**
-     * 
+     *
      * @param type $path
      * @return type
      */

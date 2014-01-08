@@ -151,12 +151,7 @@ class DNS1D {
             $x += $bw;
         }
         ob_start();
-        // send headers
-        header('Content-Type: image/png');
-        header('Cache-Control: public, must-revalidate, max-age=0'); // HTTP/1.1
-        header('Pragma: public');
-        header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // Date in the past
-        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+        // get image out put
         if ($imagick) {
             $png->drawimage($bar);
             echo $png;
@@ -165,7 +160,8 @@ class DNS1D {
             imagedestroy($png);
         }
         $image = ob_get_clean();
-        $image = 'data:image/png;base64,' . base64_encode($image);
+        $image = base64_encode($image);
+        //$image = 'data:image/png;base64,' . base64_encode($image);
         return $image;
     }
 
@@ -1491,8 +1487,8 @@ class DNS1D {
                 }
             }
             $seq .= '01010'; // center guard bar
-            for ($i = $half_len; $i < $len; ++$i) {
-                $seq .= $codes['C'][$code{$i}];
+            for ($i = $half_len; $i < $len; ++$i) {                
+                $seq .= $codes['C'][$code{intval($i)}];
             }
             $seq .= '101'; // right guard bar
         }
