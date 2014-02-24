@@ -22,13 +22,13 @@ class DNS2D {
      * Array representation of barcode.
      * @protected
      */
-    protected static $barcode_array = false;
+    protected $barcode_array = false;
 
     /**
      * path to save png in getBarcodePNGPath
      * @var <type>
      */
-    protected static $store_path;
+    protected $store_path;
 
     /**
      * Return a SVG string representation of barcode.
@@ -44,27 +44,27 @@ class DNS2D {
      * @return string SVG code.
      * @public
      */
-    public static function getBarcodeSVG($code, $type, $w = 3, $h = 3, $color = 'black') {
-        if (!DNS2D::$store_path) {
-            DNS2D::setStorPath(\Config::get("barcode::store_path"));
+    public function getBarcodeSVG($code, $type, $w = 3, $h = 3, $color = 'black') {
+        if ($this->store_path) {
+            $this->setStorPath(\Config::get("barcode::store_path"));
         }
         //set barcode code and type
-        DNS2D::setBarcode($code, $type);
+        $this->setBarcode($code, $type);
         // replace table for special characters
         $repstr = array("\0" => '', '&' => '&amp;', '<' => '&lt;', '>' => '&gt;');
         $svg = '<' . '?' . 'xml version="1.0" standalone="no"' . '?' . '>' . "\n";
         $svg .= '<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">' . "\n";
-        $svg .= '<svg width="' . round((DNS2D::$barcode_array['num_cols'] * $w), 3) . '" height="' . round((DNS2D::$barcode_array['num_rows'] * $h), 3) . '" version="1.1" xmlns="http://www.w3.org/2000/svg">' . "\n";
-        $svg .= "\t" . '<desc>' . strtr(DNS2D::$barcode_array['code'], $repstr) . '</desc>' . "\n";
+        $svg .= '<svg width="' . round(($this->barcode_array['num_cols'] * $w), 3) . '" height="' . round(($this->barcode_array['num_rows'] * $h), 3) . '" version="1.1" xmlns="http://www.w3.org/2000/svg">' . "\n";
+        $svg .= "\t" . '<desc>' . strtr($this->barcode_array['code'], $repstr) . '</desc>' . "\n";
         $svg .= "\t" . '<g id="elements" fill="' . $color . '" stroke="none">' . "\n";
         // print barcode elements
         $y = 0;
         // for each row
-        for ($r = 0; $r < DNS2D::$barcode_array['num_rows']; ++$r) {
+        for ($r = 0; $r < $this->barcode_array['num_rows']; ++$r) {
             $x = 0;
             // for each column
-            for ($c = 0; $c < DNS2D::$barcode_array['num_cols']; ++$c) {
-                if (DNS2D::$barcode_array['bcode'][$r][$c] == 1) {
+            for ($c = 0; $c < $this->barcode_array['num_cols']; ++$c) {
+                if ($this->barcode_array['bcode'][$r][$c] == 1) {
                     // draw a single barcode cell
                     $svg .= "\t\t" . '<rect x="' . $x . '" y="' . $y . '" width="' . $w . '" height="' . $h . '" />' . "\n";
                 }
@@ -91,21 +91,21 @@ class DNS2D {
      * @return string HTML code.
      * @public
      */
-    public static function getBarcodeHTML($code, $type, $w = 10, $h = 10, $color = 'black') {
-        if (!DNS2D::$store_path) {
-            DNS2D::setStorPath(\Config::get("barcode::store_path"));
+    public function getBarcodeHTML($code, $type, $w = 10, $h = 10, $color = 'black') {
+        if ($this->store_path) {
+            $this->setStorPath(\Config::get("barcode::store_path"));
         }
         //set barcode code and type
-        DNS2D::setBarcode($code, $type);
-        $html = '<div style="font-size:0;position:relative;width:' . ($w * DNS2D::$barcode_array['num_cols']) . 'px;height:' . ($h * DNS2D::$barcode_array['num_rows']) . 'px;">' . "\n";
+        $this->setBarcode($code, $type);
+        $html = '<div style="font-size:0;position:relative;width:' . ($w * $this->barcode_array['num_cols']) . 'px;height:' . ($h * $this->barcode_array['num_rows']) . 'px;">' . "\n";
         // print barcode elements
         $y = 0;
         // for each row
-        for ($r = 0; $r < DNS2D::$barcode_array['num_rows']; ++$r) {
+        for ($r = 0; $r < $this->barcode_array['num_rows']; ++$r) {
             $x = 0;
             // for each column
-            for ($c = 0; $c < DNS2D::$barcode_array['num_cols']; ++$c) {
-                if (DNS2D::$barcode_array['bcode'][$r][$c] == 1) {
+            for ($c = 0; $c < $this->barcode_array['num_cols']; ++$c) {
+                if ($this->barcode_array['bcode'][$r][$c] == 1) {
                     // draw a single barcode cell
                     $html .= '<div style="background-color:' . $color . ';width:' . $w . 'px;height:' . $h . 'px;position:absolute;left:' . $x . 'px;top:' . $y . 'px;">&nbsp;</div>' . "\n";
                 }
@@ -131,15 +131,15 @@ class DNS2D {
      * @return path or false in case of error.
      * @public
      */
-    public static function getBarcodePNG($code, $type, $w = 3, $h = 3, $color = array(0, 0, 0)) {
-        if (!DNS2D::$store_path) {
-            DNS2D::setStorPath(\Config::get("barcode::store_path"));
+    public function getBarcodePNG($code, $type, $w = 3, $h = 3, $color = array(0, 0, 0)) {
+        if ($this->store_path) {
+            $this->setStorPath(\Config::get("barcode::store_path"));
         }
         //set barcode code and type
-        DNS2D::setBarcode($code, $type);
+        $this->setBarcode($code, $type);
         // calculate image size
-        $width = (DNS2D::$barcode_array['num_cols'] * $w);
-        $height = (DNS2D::$barcode_array['num_rows'] * $h);
+        $width = ($this->barcode_array['num_cols'] * $w);
+        $height = ($this->barcode_array['num_rows'] * $h);
         if (function_exists('imagecreate')) {
             // GD library
             $imagick = false;
@@ -161,11 +161,11 @@ class DNS2D {
         // print barcode elements
         $y = 0;
         // for each row
-        for ($r = 0; $r < DNS2D::$barcode_array['num_rows']; ++$r) {
+        for ($r = 0; $r < $this->barcode_array['num_rows']; ++$r) {
             $x = 0;
             // for each column
-            for ($c = 0; $c < DNS2D::$barcode_array['num_cols']; ++$c) {
-                if (DNS2D::$barcode_array['bcode'][$r][$c] == 1) {
+            for ($c = 0; $c < $this->barcode_array['num_cols']; ++$c) {
+                if ($this->barcode_array['bcode'][$r][$c] == 1) {
                     // draw a single barcode cell
                     if ($imagick) {
                         $bar->rectangle($x, $y, ($x + $w), ($y + $h));
@@ -203,8 +203,8 @@ class DNS2D {
      * @return url or false in case of error.
      * @public
      */
-    public static function getBarcodePNGUri($code, $type, $w = 3, $h = 3, $color = array(0, 0, 0)) {
-        return url(DNS2D::getBarcodePNGPath($code, $type, $w, $h, $color));
+    public function getBarcodePNGUri($code, $type, $w = 3, $h = 3, $color = array(0, 0, 0)) {
+        return url($this->getBarcodePNGPath($code, $type, $w, $h, $color));
     }
 
     /**
@@ -221,15 +221,15 @@ class DNS2D {
      * @return path of image whice created
      * @public
      */
-    public static function getBarcodePNGPath($code, $type, $w = 3, $h = 3, $color = array(0, 0, 0)) {
-        if (!DNS2D::$store_path) {
-            DNS2D::setStorPath(\Config::get("barcode::store_path"));
+    public function getBarcodePNGPath($code, $type, $w = 3, $h = 3, $color = array(0, 0, 0)) {
+        if ($this->store_path) {
+            $this->setStorPath(\Config::get("barcode::store_path"));
         }
         //set barcode code and type
-        DNS2D::setBarcode($code, $type);
+        $this->setBarcode($code, $type);
         // calculate image size
-        $width = (DNS2D::$barcode_array['num_cols'] * $w);
-        $height = (DNS2D::$barcode_array['num_rows'] * $h);
+        $width = ($this->barcode_array['num_cols'] * $w);
+        $height = ($this->barcode_array['num_rows'] * $h);
         if (function_exists('imagecreate')) {
             // GD library
             $imagick = false;
@@ -251,11 +251,11 @@ class DNS2D {
         // print barcode elements
         $y = 0;
         // for each row
-        for ($r = 0; $r < DNS2D::$barcode_array['num_rows']; ++$r) {
+        for ($r = 0; $r < $this->barcode_array['num_rows']; ++$r) {
             $x = 0;
             // for each column
-            for ($c = 0; $c < DNS2D::$barcode_array['num_cols']; ++$c) {
-                if (DNS2D::$barcode_array['bcode'][$r][$c] == 1) {
+            for ($c = 0; $c < $this->barcode_array['num_cols']; ++$c) {
+                if ($this->barcode_array['bcode'][$r][$c] == 1) {
                     // draw a single barcode cell
                     if ($imagick) {
                         $bar->rectangle($x, $y, ($x + $w), ($y + $h));
@@ -268,7 +268,7 @@ class DNS2D {
             $y += $h;
         }
 
-        $save_file = DNS2D::checkfile(DNS2D::$store_path . $code . ".png");
+        $save_file = $this->checkfile($this->store_path . $code . ".png");
 
         if ($imagick) {
             $png->drawimage($bar);
@@ -289,14 +289,14 @@ class DNS2D {
      * @param $type (string) type of barcode: <ul><li>DATAMATRIX : Datamatrix (ISO/IEC 16022)</li><li>PDF417 : PDF417 (ISO/IEC 15438:2006)</li><li>PDF417,a,e,t,s,f,o0,o1,o2,o3,o4,o5,o6 : PDF417 with parameters: a = aspect ratio (width/height); e = error correction level (0-8); t = total number of macro segments; s = macro segment index (0-99998); f = file ID; o0 = File Name (text); o1 = Segment Count (numeric); o2 = Time Stamp (numeric); o3 = Sender (text); o4 = Addressee (text); o5 = File Size (numeric); o6 = Checksum (numeric). NOTES: Parameters t, s and f are required for a Macro Control Block, all other parametrs are optional. To use a comma character ',' on text options, replace it with the character 255: "\xff".</li><li>QRCODE : QRcode Low error correction</li><li>QRCODE,L : QRcode Low error correction</li><li>QRCODE,M : QRcode Medium error correction</li><li>QRCODE,Q : QRcode Better error correction</li><li>QRCODE,H : QR-CODE Best error correction</li><li>RAW: raw mode - comma-separad list of array rows</li><li>RAW2: raw mode - array rows are surrounded by square parenthesis.</li><li>TEST : Test matrix</li></ul>
      * @return array
      */
-    protected static function setBarcode($code, $type) {
+    protected function setBarcode($code, $type) {
         $mode = explode(',', $type);
         $qrtype = strtoupper($mode[0]);
         switch ($qrtype) {
             case 'DATAMATRIX': { // DATAMATRIX (ISO/IEC 16022)
                     $barcode = new Datamatrix($code);
-                    DNS2D::$barcode_array = $barcode->getBarcodeArray();
-                    DNS2D::$barcode_array['code'] = $code;
+                    $this->barcode_array = $barcode->getBarcodeArray();
+                    $this->barcode_array['code'] = $code;
                     break;
                 }
             case 'PDF417': { // PDF417 (ISO/IEC 15438:2006)
@@ -325,8 +325,8 @@ class DNS2D {
                         }
                     }
                     $barcode = new PDF417($code, $ecl, $aspectratio, $macro);
-                    DNS2D::$barcode_array = $barcode->getBarcodeArray();
-                    DNS2D::$barcode_array['code'] = $code;
+                    $this->barcode_array = $barcode->getBarcodeArray();
+                    $this->barcode_array['code'] = $code;
                     break;
                 }
             case 'QRCODE': { // QR-CODE
@@ -334,12 +334,12 @@ class DNS2D {
                         $mode[1] = 'L'; // Ddefault: Low error correction
                     }
                     $barcode = new QRcode($code, strtoupper($mode[1]));
-                    DNS2D::$barcode_array = $barcode->getBarcodeArray();
-                    DNS2D::$barcode_array['code'] = $code;
+                    $this->barcode_array = $barcode->getBarcodeArray();
+                    $this->barcode_array['code'] = $code;
                     break;
                 }
             default: {
-                    DNS2D::$barcode_array = false;
+                    $this->barcode_array = false;
                 }
         }
     }
@@ -349,15 +349,15 @@ class DNS2D {
      * @param type $path
      * @return type
      */
-    protected static function checkfile($path) {
+    protected function checkfile($path) {
         if (file_exists($path)) {
             unlink($path);
         }
         return $path;
     }
 
-    public static function setStorPath($path) {
-        DNS2D::$store_path = $path;
+    public function setStorPath($path) {
+        $this->store_path = $path;
     }
 
 }
