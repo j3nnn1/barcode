@@ -15,7 +15,6 @@ Next, update Composer from the Terminal:
 
     composer update
 
-
 Once this operation completes, the final step is to add the service provider. Open `app/config/app.php`, and add a new item to the providers array.
 
     'Dinesh\Barcode\BarcodeServiceProvider'
@@ -23,6 +22,14 @@ Once this operation completes, the final step is to add the service provider. Op
 If you want to change Bar-code's settings (Store Path etc.), you need to publish its config file(s).
 
     Run php artisan config:publish dinesh/barcode 
+
+Now add the alias.
+```php
+'aliases' => array(
+	'DNS1D' => 'Dinesh\Barcode\Facades\DNS1DFacade',
+        'DNS2D' => 'Dinesh\Barcode\Facades\DNS2DFacade',
+)
+```
 
 from the command line and you should find the files in app/config/packages/dinesh/barcode.
 
