@@ -125,11 +125,11 @@ class DNS1D {
             $fgcol = imagecolorallocate($png, $color[0], $color[1], $color[2]);
         } elseif (extension_loaded('imagick')) {
             $imagick = true;
-            $bgcol = new imagickpixel('rgb(255,255,255');
-            $fgcol = new imagickpixel('rgb(' . $color[0] . ',' . $color[1] . ',' . $color[2] . ')');
-            $png = new Imagick();
+            $bgcol = new \imagickpixel('rgb(255,255,255');
+            $fgcol = new \imagickpixel('rgb(' . $color[0] . ',' . $color[1] . ',' . $color[2] . ')');
+            $png = new \Imagick();
             $png->newImage($width, $height, 'none', 'png');
-            $bar = new imagickdraw();
+            $bar = new \imagickdraw();
             $bar->setfillcolor($fgcol);
         } else {
             return false;
