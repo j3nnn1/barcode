@@ -45,7 +45,7 @@ class DNS2D {
      * @public
      */
     public function getBarcodeSVG($code, $type, $w = 3, $h = 3, $color = 'black') {
-        if ($this->store_path) {
+        if (!$this->store_path) {
             $this->setStorPath(\Config::get("barcode::store_path"));
         }
         //set barcode code and type
@@ -92,7 +92,7 @@ class DNS2D {
      * @public
      */
     public function getBarcodeHTML($code, $type, $w = 10, $h = 10, $color = 'black') {
-        if ($this->store_path) {
+        if (!$this->store_path) {
             $this->setStorPath(\Config::get("barcode::store_path"));
         }
         //set barcode code and type
@@ -132,7 +132,7 @@ class DNS2D {
      * @public
      */
     public function getBarcodePNG($code, $type, $w = 3, $h = 3, $color = array(0, 0, 0)) {
-        if ($this->store_path) {
+        if (!$this->store_path) {
             $this->setStorPath(\Config::get("barcode::store_path"));
         }
         //set barcode code and type
@@ -222,7 +222,7 @@ class DNS2D {
      * @public
      */
     public function getBarcodePNGPath($code, $type, $w = 3, $h = 3, $color = array(0, 0, 0)) {
-        if ($this->store_path) {
+        if (!$this->store_path) {
             $this->setStorPath(\Config::get("barcode::store_path"));
         }
         //set barcode code and type
