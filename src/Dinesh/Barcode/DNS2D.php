@@ -267,8 +267,8 @@ class DNS2D {
             }
             $y += $h;
         }
-
-        $save_file = $this->checkfile($this->store_path . $code . ".png");
+        $file_name=\Str::slug($code);
+        $save_file = $this->checkfile($this->store_path . $file_name . ".png");
 
         if ($imagick) {
             $png->drawimage($bar);
