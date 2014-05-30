@@ -358,6 +358,7 @@ class DNS2D {
 
     public function setStorPath($path) {
         $this->store_path = $path;
+        return $this;
     }
 
 }
