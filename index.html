@@ -1,83 +1,198 @@
 <!DOCTYPE html>
 <html>
+
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Barcode : Laravel 4 all Bar-code generator  like Qr Code , PDF417,C39, C39+,C39E,C39E+,C93,S25,S25+,I25,I25+,C128,C128A,C128B,C128C,2-Digits UPC-Based Extention,5-Digits UPC-Based Extention,EAN 8,EAN 13,UPC-A,UPC-E,MSI (Variation of Plessey code) " />
 
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
-    <title>Barcode by dineshrabara</title>
+    <title>Barcode</title>
   </head>
 
   <body>
-    <header>
-      <div class="inner">
-        <h1>Barcode</h1>
-        <h2>Laravel 4 all Bar-code generator  like Qr Code , PDF417,C39, C39+,C39E,C39E+,C93,S25,S25+,I25,I25+,C128,C128A,C128B,C128C,2-Digits UPC-Based Extention,5-Digits UPC-Based Extention,EAN 8,EAN 13,UPC-A,UPC-E,MSI (Variation of Plessey code) </h2>
-        <a href="https://github.com/dineshrabara/barcode" class="button"><small>View project on</small>GitHub</a>
-      </div>
-    </header>
 
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-          <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/dineshrabara/barcode">View on GitHub</a>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+          <h1 id="project_title">Barcode</h1>
+          <h2 id="project_tagline">Laravel 4 all Bar-code generator  like Qr Code , PDF417,C39, C39+,C39E,C39E+,C93,S25,S25+,I25,I25+,C128,C128A,C128B,C128C,2-Digits UPC-Based Extention,5-Digits UPC-Based Extention,EAN 8,EAN 13,UPC-A,UPC-E,MSI (Variation of Plessey code) </h2>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/dineshrabara/barcode/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/dineshrabara/barcode/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h3>
+<a name="welcome-to-laravel-barcode-packag" class="anchor" href="#welcome-to-laravel-barcode-packag"><span class="octicon octicon-link"></span></a>Welcome to Laravel Barcode Packag</h3>
+
+<p><a href="https://packagist.org/packages/dinesh/barcode"><img src="https://poser.pugx.org/dinesh/barcode/v/stable.png" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/dinesh/barcode"><img src="https://poser.pugx.org/dinesh/barcode/downloads.png" alt="Total Downloads"></a>
+<a href="https://travis-ci.org/dineshrabara/barcode"><img src="https://travis-ci.org/dineshrabara/barcode.png?branch=master" alt="Build Status"></a></p>
+
+<p><a href="https://github.com/dineshrabara/barcode/wiki">Read More Wiki</a></p>
+
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>Begin by installing this package through Composer. Edit your project's <code>composer.json</code> file to require <code>dinesh/barcode</code>.</p>
+
+<pre><code>"require": {
+    "laravel/framework": "4.0.*",
+    "dinesh/barcode": "dev-master"
+}
 </code></pre>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p>Next, update Composer from the Terminal:</p>
 
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+<pre><code>composer update
+</code></pre>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<p>Once this operation completes, the final step is to add the service provider. Open <code>app/config/app.php</code>, and add a new item to the providers array.</p>
 
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+<pre><code>'Dinesh\Barcode\BarcodeServiceProvider'
+</code></pre>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<p>If you want to change Bar-code's settings (Store Path etc.), you need to publish its config file(s).</p>
+
+<pre><code>Run php artisan config:publish dinesh/barcode 
+</code></pre>
+
+<p>Now add the alias.</p>
+
+<div class="highlight highlight-php"><pre><span class="s1">'aliases'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'DNS1D'</span> <span class="o">=&gt;</span> <span class="s1">'Dinesh\Barcode\Facades\DNS1DFacade'</span><span class="p">,</span>
+        <span class="s1">'DNS2D'</span> <span class="o">=&gt;</span> <span class="s1">'Dinesh\Barcode\Facades\DNS2DFacade'</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+
+<p>from the command line and you should find the files in app/config/packages/dinesh/barcode.</p>
+
+<p>Bar-code generator like 
+Qr Code,
+PDF417,
+C39,C39+,
+C39E,C39E+,
+C93,
+S25,S25+,
+I25,I25+,
+C128,C128A,C128B,C128C,
+2-Digits UPC-Based Extention,
+5-Digits UPC-Based Extention,
+EAN 8,EAN 13,
+UPC-A,UPC-E,
+MSI (Variation of Plessey code)</p>
+
+<p>generator in html, png embedded base64 code and SVG canvas </p>
+
+<pre><code>echo DNS1D::getBarcodeSVG("4445645656", "PHARMA2T");
+echo DNS1D::getBarcodeHTML("4445645656", "PHARMA2T");
+echo '&lt;img src="data:image/png,' . DNS1D::getBarcodePNG("4", "C39+") . '" alt="barcode"   /&gt;';
+echo DNS1D::getBarcodePNGPath("4445645656", "PHARMA2T");
+echo '&lt;img src="data:image/png,' . DNS1D::getBarcodePNG("4", "C39+") . '" alt="barcode"   /&gt;';
+
+
+
+echo DNS1D::getBarcodeSVG("4445645656", "C39");
+echo DNS2D::getBarcodeHTML("4445645656", "QRCODE");
+echo DNS2D::getBarcodePNGPath("4445645656", "PDF417");
+echo DNS2D::getBarcodeSVG("4445645656", "DATAMATRIX");
+echo '&lt;img src="data:image/png,' . DNS2D::getBarcodePNG("4", "PDF417") . '" alt="barcode"   /&gt;';
+</code></pre>
+
+<h2>
+<a name="width-and-height-example" class="anchor" href="#width-and-height-example"><span class="octicon octicon-link"></span></a>Width and Height example</h2>
+
+<pre><code>echo DNS1D::getBarcodeSVG("4445645656", "PHARMA2T",3,33);
+echo DNS1D::getBarcodeHTML("4445645656", "PHARMA2T",3,33);
+echo '&lt;img src="' . DNS1D::getBarcodePNG("4", "C39+",3,33) . '" alt="barcode"   /&gt;';
+echo DNS1D::getBarcodePNGPath("4445645656", "PHARMA2T",3,33);
+echo '&lt;img src="data:image/png,' . DNS1D::getBarcodePNG("4", "C39+",3,33) . '" alt="barcode"   /&gt;';
+</code></pre>
+
+<h2>
+<a name="color" class="anchor" href="#color"><span class="octicon octicon-link"></span></a>Color</h2>
+
+<pre><code>echo DNS1D::getBarcodeSVG("4445645656", "PHARMA2T",3,33,"green");
+echo DNS1D::getBarcodeHTML("4445645656", "PHARMA2T",3,33,"green");
+echo '&lt;img src="' . DNS1D::getBarcodePNG("4", "C39+",3,33,array(1,1,1)) . '" alt="barcode"   /&gt;';
+echo DNS1D::getBarcodePNGPath("4445645656", "PHARMA2T",3,33,array(255,255,0));
+echo '&lt;img src="data:image/png,' . DNS1D::getBarcodePNG("4", "C39+",3,33,array(1,1,1)) . '" alt="barcode"   /&gt;';
+</code></pre>
+
+<h2>
+<a name="2d-barcodes" class="anchor" href="#2d-barcodes"><span class="octicon octicon-link"></span></a>2D Barcodes</h2>
+
+<pre><code>echo DNS2D::getBarcodeHTML("4445645656", "QRCODE");
+echo DNS2D::getBarcodePNGPath("4445645656", "PDF417");
+echo DNS2D::getBarcodeSVG("4445645656", "DATAMATRIX");     
+</code></pre>
+
+<h2>
+<a name="1d-barcodes" class="anchor" href="#1d-barcodes"><span class="octicon octicon-link"></span></a>1D Barcodes</h2>
+
+<pre><code>echo DNS1D::getBarcodeHTML("4445645656", "C39");
+echo DNS1D::getBarcodeHTML("4445645656", "C39+");
+echo DNS1D::getBarcodeHTML("4445645656", "C39E");
+echo DNS1D::getBarcodeHTML("4445645656", "C39E+");
+echo DNS1D::getBarcodeHTML("4445645656", "C93");
+echo DNS1D::getBarcodeHTML("4445645656", "S25");
+echo DNS1D::getBarcodeHTML("4445645656", "S25+");
+echo DNS1D::getBarcodeHTML("4445645656", "I25");
+echo DNS1D::getBarcodeHTML("4445645656", "I25+");
+echo DNS1D::getBarcodeHTML("4445645656", "C128");
+echo DNS1D::getBarcodeHTML("4445645656", "C128A");
+echo DNS1D::getBarcodeHTML("4445645656", "C128B");
+echo DNS1D::getBarcodeHTML("4445645656", "C128C");
+echo DNS1D::getBarcodeHTML("44455656", "EAN2");
+echo DNS1D::getBarcodeHTML("4445656", "EAN5");
+echo DNS1D::getBarcodeHTML("4445", "EAN8");
+echo DNS1D::getBarcodeHTML("4445", "EAN13");
+echo DNS1D::getBarcodeHTML("4445645656", "UPCA");
+echo DNS1D::getBarcodeHTML("4445645656", "UPCE");
+echo DNS1D::getBarcodeHTML("4445645656", "MSI");
+echo DNS1D::getBarcodeHTML("4445645656", "MSI+");
+echo DNS1D::getBarcodeHTML("4445645656", "POSTNET");
+echo DNS1D::getBarcodeHTML("4445645656", "PLANET");
+echo DNS1D::getBarcodeHTML("4445645656", "RMS4CC");
+echo DNS1D::getBarcodeHTML("4445645656", "KIX");
+echo DNS1D::getBarcodeHTML("4445645656", "IMB");
+echo DNS1D::getBarcodeHTML("4445645656", "CODABAR");
+echo DNS1D::getBarcodeHTML("4445645656", "CODE11");
+echo DNS1D::getBarcodeHTML("4445645656", "PHARMA");
+echo DNS1D::getBarcodeHTML("4445645656", "PHARMA2T");
+</code></pre>
 
 <h3>
 <a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<pre><code>@dineshrabara
+</code></pre>
 
 <h3>
 <a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-        </section>
-
-        <aside id="sidebar">
-          <a href="https://github.com/dineshrabara/barcode/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/dineshrabara/barcode/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
-
-          <p class="repo-owner"><a href="https://github.com/dineshrabara/barcode"></a> is maintained by <a href="https://github.com/dineshrabara">dineshrabara</a>.</p>
-
-          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
-      </div>
+<p>Having trouble with Packag? contact <a href="mailto:dinesh.rabara@gmail.com">dinesh.rabara@gmail.com</a> and we’ll help you sort it out.</p>
+      </section>
     </div>
 
-  
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Barcode maintained by <a href="https://github.com/dineshrabara">dineshrabara</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
   </body>
 </html>
