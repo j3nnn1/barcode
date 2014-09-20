@@ -5,6 +5,7 @@ namespace Dinesh\Barcode;
 use Dinesh\Barcode\QRcode;
 use Dinesh\Barcode\Datamatrix;
 use Dinesh\Barcode\PDF417;
+use Illuminate\Support\Str;
 
 /*
  * To change this template, choose Tools | Templates
@@ -267,7 +268,7 @@ class DNS2D {
             }
             $y += $h;
         }
-        $file_name=\Str::slug($code);
+        $file_name= Str::slug($code);
         $save_file = $this->checkfile($this->store_path . $file_name . ".png");
 
         if ($imagick) {
