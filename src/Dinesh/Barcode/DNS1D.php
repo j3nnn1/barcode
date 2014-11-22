@@ -147,7 +147,7 @@ class DNS1D {
                 if ($imagick) {
                     $bar->rectangle($x, $y, ($x + $bw), ($y + $bh));
                 } else {
-                    imagefilledrectangle($png, $x, $y, ($x + $bw), ($y + $bh), $fgcol);
+                    imagefilledrectangle($png, $x, $y, ($x + $bw) - 1, ($y + $bh), $fgcol);
                 }
             }
             $x += $bw;
@@ -214,7 +214,7 @@ class DNS1D {
                 if ($imagick) {
                     $bar->rectangle($x, $y, ($x + $bw), ($y + $bh));
                 } else {
-                    imagefilledrectangle($png, $x, $y, ($x + $bw), ($y + $bh), $fgcol);
+                    imagefilledrectangle($png, $x, $y, ($x + $bw) - 1, ($y + $bh), $fgcol);
                 }
             }
             $x += $bw;
