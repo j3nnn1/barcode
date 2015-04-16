@@ -6,11 +6,7 @@ use Dinesh\Barcode\QRcode;
 use Dinesh\Barcode\Datamatrix;
 use Dinesh\Barcode\PDF417;
 use Illuminate\Support\Str;
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+use Illuminate\Contracts\Config\Repository as ConfigRepository;
 
 /**
  * Description of DNS2D
@@ -32,6 +28,19 @@ class DNS2D {
     protected $store_path;
 
     /**
+    * @var \Illuminate\Contracts\Config\Repository
+    */
+    protected $config;
+
+    /**
+    * @param \Illuminate\Contracts\Config\Repository $config
+    */
+    public function __construct(ConfigRepository $config){
+        $this->config = $config;
+        $this->store_path = $this->config->get('barcode.store_path');
+    }
+
+    /**
      * Return a SVG string representation of barcode.
      * <li>$arrcode['code'] code to be printed on text label</li>
      * <li>$arrcode['num_rows'] required number of rows</li>
@@ -46,9 +55,6 @@ class DNS2D {
      * @public
      */
     public function getBarcodeSVG($code, $type, $w = 3, $h = 3, $color = 'black') {
-        if (!$this->store_path) {
-            $this->setStorPath(\Config::get("barcode::store_path"));
-        }
         //set barcode code and type
         $this->setBarcode($code, $type);
         // replace table for special characters
@@ -93,9 +99,6 @@ class DNS2D {
      * @public
      */
     public function getBarcodeHTML($code, $type, $w = 10, $h = 10, $color = 'black') {
-        if (!$this->store_path) {
-            $this->setStorPath(\Config::get("barcode::store_path"));
-        }
         //set barcode code and type
         $this->setBarcode($code, $type);
         $html = '<div style="font-size:0;position:relative;width:' . ($w * $this->barcode_array['num_cols']) . 'px;height:' . ($h * $this->barcode_array['num_rows']) . 'px;">' . "\n";
@@ -133,9 +136,6 @@ class DNS2D {
      * @public
      */
     public function getBarcodePNG($code, $type, $w = 3, $h = 3, $color = array(0, 0, 0)) {
-        if (!$this->store_path) {
-            $this->setStorPath(\Config::get("barcode::store_path"));
-        }
         //set barcode code and type
         $this->setBarcode($code, $type);
         // calculate image size
@@ -223,9 +223,6 @@ class DNS2D {
      * @public
      */
     public function getBarcodePNGPath($code, $type, $w = 3, $h = 3, $color = array(0, 0, 0)) {
-        if (!$this->store_path) {
-            $this->setStorPath(\Config::get("barcode::store_path"));
-        }
         //set barcode code and type
         $this->setBarcode($code, $type);
         // calculate image size
