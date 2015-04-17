@@ -10,7 +10,7 @@ Begin by installing this package through Composer. Edit your project's `composer
 
     "require": {
 		"laravel/framework": "5.0.x",
-		"dinesh/barcode": "dev-master"
+		"dinesh/barcode": "5.0.*@dev"
 	}
 
 Next, update Composer from the Terminal:
