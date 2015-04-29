@@ -217,7 +217,7 @@ class DNS1D {
             }
             $x += $bw;
         }
-        $file_name= Str::slug($code);
+        $file_name= Str::slug($type.'_'.$code);
         $save_file = $this->checkfile($this->store_path . $file_name . ".png");
 
         if ($imagick) {
