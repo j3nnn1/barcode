@@ -165,6 +165,44 @@ class DNS2D {
     }
 
     /**
+     * Return an HTML representation of barcode implemented in html table. Useful for printing Barcodes in email letters (Email client does not support css)
+     * <li>$arrcode['code'] code to be printed on text label</li>
+     * <li>$arrcode['num_rows'] required number of rows</li>
+     * <li>$arrcode['num_cols'] required number of columns</li>
+     * <li>$arrcode['bcode'][$r][$c] value of the cell is $r row and $c column (0 = transparent, 1 = black)</li></ul>
+     * @param $code (string) code to print
+     * @param $type (string) type of barcode: <ul><li>DATAMATRIX : Datamatrix (ISO/IEC 16022)</li><li>PDF417 : PDF417 (ISO/IEC 15438:2006)</li><li>PDF417,a,e,t,s,f,o0,o1,o2,o3,o4,o5,o6 : PDF417 with parameters: a = aspect ratio (width/height); e = error correction level (0-8); t = total number of macro segments; s = macro segment index (0-99998); f = file ID; o0 = File Name (text); o1 = Segment Count (numeric); o2 = Time Stamp (numeric); o3 = Sender (text); o4 = Addressee (text); o5 = File Size (numeric); o6 = Checksum (numeric). NOTES: Parameters t, s and f are required for a Macro Control Block, all other parametrs are optional. To use a comma character ',' on text options, replace it with the character 255: "\xff".</li><li>QRCODE : QRcode Low error correction</li><li>QRCODE,L : QRcode Low error correction</li><li>QRCODE,M : QRcode Medium error correction</li><li>QRCODE,Q : QRcode Better error correction</li><li>QRCODE,H : QR-CODE Best error correction</li><li>RAW: raw mode - comma-separad list of array rows</li><li>RAW2: raw mode - array rows are surrounded by square parenthesis.</li><li>TEST : Test matrix</li></ul>
+     * @param $cellWidth (int) Width of a single rectangle element in pixels or without units.
+     * @param $cellHeight (int) Height of a single rectangle element in pixels or without units.
+     * @param $color (string) Foreground color for bar elements.
+     * @param $bgColor (string) Background color for bar elements.
+     * @return string HTML code.
+     * @public
+     */
+    public function getBarcodeTabledHTML($code, $type, $cellWidth = 10, $cellHeight = 10, $color = '#000', $bgColor = '#fff') {
+        //set barcode code and type
+        $this->setBarcode($code, $type);
+        $html = "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\"><tbody>" . "\n";
+        // print barcode elements
+        // for each row
+        for ($r = 0; $r < $this->barcode_array['num_rows']; ++$r) {
+            $html .= "<tr>";
+            // for each column
+            for ($c = 0; $c < $this->barcode_array['num_cols']; ++$c) {
+                if ($this->barcode_array['bcode'][$r][$c] == 1) {
+                    // draw a single barcode cell
+                    $html .= "<td width=\"".$cellWidth."\" height=\"".$cellHeight."\" bgcolor=\"".$color."\"></td>" . "\n";
+                } else {
+                    $html .= "<td width=\"".$cellWidth."\" height=\"".$cellHeight."\" bgcolor=\"".$bgColor."\"></td>" . "\n";
+                }
+            }
+            $html .= "</tr>";
+        }
+        $html .= "</tbody></table>" . "\n";
+        return $html;
+    }
+
+    /**
      * Return a PNG image representation of barcode (requires GD or Imagick library).
      * <li>$arrcode['code'] code to be printed on text label</li>
      * <li>$arrcode['num_rows'] required number of rows</li>
